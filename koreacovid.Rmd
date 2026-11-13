@@ -1,7 +1,7 @@
 ---
 title: "Initial Korean covid 19"
-author: "your name here"
-date: "todays date"
+author: "Alisha Kim"
+date: "November 12th, 2026"
 output:
   html_document: default
   pdf_document: default
@@ -28,13 +28,48 @@ Research Question: - Is dying independent of sex?
 
 # Introduction
 
+Using Kdata, can we determine that men and women are equally likely to die of Covid19 from data collected in South Korea through 2019.
+
+$H_A$ There is a relationship between gender and death from Covid19 in South Korea in 2019.
+
+$H_0$ There is no relationship between gender and death from Covid19 in South Korea in 2019.
+
+# Methods 
+Sex is categorical.
+Result is categorical.
+
 # Data Results
+
 
 ## Graphical results    
 
+```{r}
+barchartGC(~result + sex,data=kData)
+barchartGC(~result + sex,data=kData, type="percent")
+
+```
+
+The graph suggests that males are likely to die in comparison to females
 ## Numerical results
+
+```{r}
+table1 <- xtabs(~result + Sex, data=kData)
+rowPerc(table1)
+colPerc(table1)
+```
+The numerical result shows that out of 100, 65% of males died compared to 36% of females, indicating that men are almost twice as likely to die than women. 
 
 ## Inferential results 
 
-# Conclusions
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+The p value is 0.001, which is less than 0.05. This means that we reject the null hypothesis. We conclude that there is a connection between sex and death from Covid19.
 
+## Conclusions  
+
+To answer the question, can we determine that men and women are equally likely to die of Covid19 from data collected in South Korea through 2019? 
+
+We reject the null hypothesis, and conclude that there is a relationship between sex and death from Covid19.The graphical summary shows that men have a higher likelihood of death compared to women. Concluding, the odds ratio states that men die at a rate of 2.3 times the rate of women from Covid19. 
